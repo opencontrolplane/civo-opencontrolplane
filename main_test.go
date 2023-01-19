@@ -6,6 +6,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/test/bufconn"
+	"github.com/civo/civo-opencp/pkg"
 	"log"
 	"net"
 )
@@ -15,7 +16,7 @@ func FakeServer(ctx context.Context) (opencpspec.SSHKeyServiceClient, func()) {
 	lis := bufconn.Listen(buffer)
 
 	baseServer := grpc.NewServer()
-	opencpspec.RegisterSSHKeyServiceServer(baseServer, &Server{})
+	opencpspec.RegisterSSHKeyServiceServer(baseServer, &pkg.Server{})
 	go func() {
 		if err := baseServer.Serve(lis); err != nil {
 			log.Printf("error serving server: %v", err)

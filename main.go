@@ -11,19 +11,12 @@ import (
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	opencpspec "github.com/opencontrolplane/opencp-spec/grpc"
+	"github.com/civo/civo-opencp/pkg"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )
 
-type Server struct {
-	opencpspec.LoginServer
-	opencpspec.VirtualMachineServiceServer
-	opencpspec.KubernetesClusterServiceServer
-	opencpspec.NamespaceServiceServer
-	opencpspec.DomainServiceServer
-	opencpspec.SSHKeyServiceServer
-	opencpspec.FirewallServiceServer
-}
+
 
 func main() {
 	logrus.SetLevel(logrus.InfoLevel)
@@ -46,21 +39,21 @@ func main() {
 
 	grpcServer := grpc.NewServer(
 		grpc_middleware.WithStreamServerChain(
-			grpc_auth.StreamServerInterceptor(AuthMiddlewareFunc),
+			grpc_auth.StreamServerInterceptor(pkg.AuthMiddlewareFunc),
 		),
 		grpc_middleware.WithUnaryServerChain(
-			grpc_auth.UnaryServerInterceptor(AuthMiddlewareFunc),
+			grpc_auth.UnaryServerInterceptor(pkg.AuthMiddlewareFunc),
 			grpc_logrus.UnaryServerInterceptor(logger, opts...),
 		),
 	)
 
-	opencpspec.RegisterLoginServer(grpcServer, &Server{})
-	opencpspec.RegisterVirtualMachineServiceServer(grpcServer, &Server{})
-	opencpspec.RegisterKubernetesClusterServiceServer(grpcServer, &Server{})
-	opencpspec.RegisterNamespaceServiceServer(grpcServer, &Server{})
-	opencpspec.RegisterDomainServiceServer(grpcServer, &Server{})
-	opencpspec.RegisterSSHKeyServiceServer(grpcServer, &Server{})
-	opencpspec.RegisterFirewallServiceServer(grpcServer, &Server{})
+	opencpspec.RegisterLoginServer(grpcServer, &pkg.Server{})
+	opencpspec.RegisterVirtualMachineServiceServer(grpcServer, &pkg.Server{})
+	opencpspec.RegisterKubernetesClusterServiceServer(grpcServer, &pkg.Server{})
+	opencpspec.RegisterNamespaceServiceServer(grpcServer, &pkg.Server{})
+	opencpspec.RegisterDomainServiceServer(grpcServer, &pkg.Server{})
+	opencpspec.RegisterSSHKeyServiceServer(grpcServer, &pkg.Server{})
+	opencpspec.RegisterFirewallServiceServer(grpcServer, &pkg.Server{})
 
 	log.Printf("server listening at %v", lis.Addr())
 	if err := grpcServer.Serve(lis); err != nil {
