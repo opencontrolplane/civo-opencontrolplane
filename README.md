@@ -12,4 +12,6 @@ also you need pass the ENV variable REGION to the container, this is the region 
 docker run -d -p 8080:8080 -e REGION=lon1 civo/opencontrolplane
 ``` 
 
-
+## Dependencies
+The Civo OpenControlPlane depends on the following projects:
+- [Opencp-shim](https://github.com/opencontrolplane/opencp-shim)
