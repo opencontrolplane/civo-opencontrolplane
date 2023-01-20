@@ -14,7 +14,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -ldflags="-X 'main.Version=$VERSION'" -o main .
+RUN go build -ldflags="-X 'pkg.Version=$VERSION'" -o main .
 
 FROM debian:stable-slim
 
