@@ -22,7 +22,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: civo/civo-opencontrolplane:${{  github.ref_name }}
+          tags: civobot/opencp:${{  github.ref_name }}
           build-args: |
             ACCESS_TOKEN_USR=${{ secrets.ACCESS_TOKEN_USR }}
             ACCESS_TOKEN_PWD=${{ secrets.ACCESS_TOKEN_PWD }}

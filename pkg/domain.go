@@ -97,19 +97,8 @@ func (s *Server) CreateDomain(ctx context.Context, in *opencpspec.Domain) (*open
 		}
 	}
 
-	// Return the domain
-	return &opencpspec.Domain{
-		Metadata: &metav1.ObjectMeta{
-			Name: domainResult.Name,
-			UID:  types.UID(domainResult.ID),
-		},
-		Spec: &opencpspec.DomainSpec{
-			Records: in.Spec.Records,
-		},
-		Status: &opencpspec.DomainStatus{
-			State: "Active",
-		},
-	}, nil
+	// Return the domain from the GRPC server
+	return s.GetDomain(ctx, &opencpspec.FilterOptions{Name: &domainResult.Name})
 }
 
 func (s *Server) GetDomain(ctx context.Context, option *opencpspec.FilterOptions) (*opencpspec.Domain, error) {
@@ -171,6 +160,12 @@ func (s *Server) DeleteDomain(ctx context.Context, option *opencpspec.FilterOpti
 		return nil, err
 	}
 
+	// Get the domain from the GRPC to return it
+	domain, err := s.GetDomain(ctx, option)
+	if err != nil {
+		return nil, err
+	}
+
 	// Delete the domain
 	_, err = client.DeleteDNSDomain(domainResult)
 	if err != nil {
@@ -178,21 +173,7 @@ func (s *Server) DeleteDomain(ctx context.Context, option *opencpspec.FilterOpti
 	}
 
 	// Return the domain
-	return &opencpspec.Domain{
-		Metadata: &metav1.ObjectMeta{
-			Name: domainResult.Name,
-			UID:  types.UID(domainResult.ID),
-			CreationTimestamp: metav1.Time{
-				Time: metav1.Now().Time,
-			},
-		},
-		Spec: &opencpspec.DomainSpec{
-			Records: nil,
-		},
-		Status: &opencpspec.DomainStatus{
-			State: "Deleted",
-		},
-	}, nil
+	return domain, nil
 }
 
 // UpdateDomain(Domain) returns (Domain) {}

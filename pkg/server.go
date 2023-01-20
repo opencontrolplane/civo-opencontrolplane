@@ -12,4 +12,5 @@ type Server struct {
 	opencpspec.DomainServiceServer
 	opencpspec.SSHKeyServiceServer
 	opencpspec.FirewallServiceServer
+	opencpspec.IpServiceServer
 }

@@ -54,6 +54,7 @@ func main() {
 	opencpspec.RegisterDomainServiceServer(grpcServer, &pkg.Server{})
 	opencpspec.RegisterSSHKeyServiceServer(grpcServer, &pkg.Server{})
 	opencpspec.RegisterFirewallServiceServer(grpcServer, &pkg.Server{})
+	opencpspec.RegisterIpServiceServer(grpcServer, &pkg.Server{})
 
 	log.Printf("server listening at %v", lis.Addr())
 	if err := grpcServer.Serve(lis); err != nil {

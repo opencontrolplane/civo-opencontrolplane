@@ -7,6 +7,8 @@ github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e/go.mod h1:nSuG5e5P
 github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1/go.mod h1:Q3SI9o4m/ZMnBNeIyt5eFwwo7qiLfzFZmjNmxjkiQlU=
 github.com/civo/civogo v0.3.22 h1:IYhsPP7kiRWe8SnUs9CMWzL4H+t4qi0hYQ0Nhkn7c5A=
 github.com/civo/civogo v0.3.22/go.mod h1:SbS06e0JPgIF27r1sLC97gjU1xWmONQeHgzF1hfLpak=
+github.com/civo/civogo v0.3.23 h1:FTSad682Qu7CsjkNAYWpSe2CSR1NJOE2NRxc6gUzHDk=
+github.com/civo/civogo v0.3.23/go.mod h1:SbS06e0JPgIF27r1sLC97gjU1xWmONQeHgzF1hfLpak=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -86,6 +88,8 @@ github.com/onsi/gomega v1.19.0/go.mod h1:LY+I3pBVzYsTBU1AnDwOSxaYi9WoWiqgwooUqq9
 github.com/onsi/gomega v1.23.0 h1:/oxKu9c2HVap+F3PfKort2Hw5DEU+HGlW8n+tguWsys=
 github.com/opencontrolplane/opencp-spec v0.1.0 h1:LCwL230UbOwJNz2gPnsNHYCfG1ZDAd+x+h+xqMtY+7E=
 github.com/opencontrolplane/opencp-spec v0.1.0/go.mod h1:F7CLNDq6HDLj9g84ecWzVMJRwsd3LtTwYY6ebh9UvTs=
+github.com/opencontrolplane/opencp-spec v0.1.1 h1:EEoud923w0eu4gyJZr+0K4Bdb0J4Q2+wI/Pg8IezLA0=
+github.com/opencontrolplane/opencp-spec v0.1.1/go.mod h1:F7CLNDq6HDLj9g84ecWzVMJRwsd3LtTwYY6ebh9UvTs=
 github.com/opentracing/opentracing-go v1.1.0/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
