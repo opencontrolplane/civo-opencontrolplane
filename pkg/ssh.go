@@ -85,28 +85,17 @@ func (s *Server) CreateSSHKey(ctx context.Context, in *opencpspec.SSHKey) (*open
 func (s *Server) DeleteSSHKey(ctx context.Context, option *opencpspec.FilterOptions) (*opencpspec.SSHKey, error) {
 	client := ctx.Value("client").(*civogo.Client)
 
-	sshKey, err := client.FindSSHKey(*option.Name)
+	sshKey, err := s.GetSSHKey(ctx, option)
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = client.DeleteSSHKey(sshKey.ID)
-	if err != nil {
-		return nil, err
+	if sshKey != nil {
+		_, err = client.DeleteSSHKey(string(sshKey.Metadata.UID))
+		if err != nil {
+			return nil, err
+		}
 	}
 
-	return &opencpspec.SSHKey{
-		Metadata: &metav1.ObjectMeta{
-			Name:              sshKey.Name,
-			UID:               types.UID(sshKey.ID),
-			CreationTimestamp: metav1.Time{Time: sshKey.CreatedAt},
-		},
-		Spec: &opencpspec.SSHKeySpec{
-			Publickey: sshKey.PublicKey,
-		},
-		Status: &opencpspec.SSHKeyStatus{
-			Fingerprint: sshKey.Fingerprint,
-			State:       "Active",
-		},
-	}, nil
+	return sshKey, nil
 }

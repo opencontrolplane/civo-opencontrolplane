@@ -13,4 +13,7 @@ type Server struct {
 	opencpspec.SSHKeyServiceServer
 	opencpspec.FirewallServiceServer
 	opencpspec.IpServiceServer
+	opencpspec.DatabaseServiceServer
+	opencpspec.ObjectStorageServiceServer
+	opencpspec.ObjectStorageCredentialServiceServer
 }

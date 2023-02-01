@@ -62,28 +62,12 @@ func (s *Server) CreateNamespace(ctx context.Context, in *opencpspec.Namespace) 
 	}
 
 	// Get the network
-	network, err := client.GetNetwork(networkResult.ID)
+	network, err := s.GetNamespace(ctx, &opencpspec.FilterOptions{Name: &networkResult.Label})
 	if err != nil {
 		log.Println(err)
 	}
 
-	// Convert the network to the opencp format
-	networks := &opencpspec.Namespace{
-		Kind:       "Namespace",
-		ApiVersion: "v1",
-		Metadata: &metav1.ObjectMeta{
-			Name: network.Label,
-			UID:  types.UID(network.ID),
-		},
-		Spec: &corev1.NamespaceSpec{
-			Finalizers: []corev1.FinalizerName{},
-		},
-		Status: &corev1.NamespaceStatus{
-			Phase: corev1.NamespaceActive,
-		},
-	}
-
-	return networks, nil
+	return network, nil
 }
 
 func (s *Server) GetNamespace(ctx context.Context, option *opencpspec.FilterOptions) (*opencpspec.Namespace, error) {
@@ -131,38 +115,20 @@ func (s *Server) DeleteNamespace(ctx context.Context, option *opencpspec.FilterO
 	client := ctx.Value("client").(*civogo.Client)
 
 	// Get all the networks again and return them
-	network, err := client.FindNetwork(*option.Id)
+	network, err := s.GetNamespace(ctx, option)
 	if err != nil {
 		log.Println(err)
 	}
 
 	if network != nil {
-		_, err = client.DeleteNetwork(network.ID)
+		_, err = client.DeleteNetwork(string(network.Metadata.UID))
 		if err != nil {
 			log.Println(err)
 		}
 	}
 
-	// Convert the networks to the opencp format
-	var networks *opencpspec.Namespace
-	if network != nil {
-		networks = &opencpspec.Namespace{
-			Kind:       "Namespace",
-			ApiVersion: "v1",
-			Metadata: &metav1.ObjectMeta{
-				Name: network.Label,
-				UID:  types.UID(network.ID),
-			},
-			Spec: &corev1.NamespaceSpec{
-				Finalizers: []corev1.FinalizerName{},
-			},
-			Status: &corev1.NamespaceStatus{
-				Phase: corev1.NamespaceActive,
-			},
-		}
-	}
-
-	return networks, nil
+	// Return the list of networks
+	return network, nil
 }
 
 // UpdateNamespace(context.Context, *Namespace) (*Namespace, error)

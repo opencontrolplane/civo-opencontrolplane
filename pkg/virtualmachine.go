@@ -26,6 +26,12 @@ func (s *Server) ListVirtualMachine(ctx context.Context, option *opencpspec.Filt
 		return nil, err
 	}
 
+	// Get all firewall from Civo
+	firewall, err := s.ListFirewall(ctx, option)
+	if err != nil {
+		return nil, err
+	}
+
 	// convert the virtual machines to the opencp format
 	vms := []*opencpspec.VirtualMachine{}
 	for _, vm := range allvm {
@@ -34,6 +40,14 @@ func (s *Server) ListVirtualMachine(ctx context.Context, option *opencpspec.Filt
 		for _, net := range network.Items {
 			if net.Metadata.UID == types.UID(vm.NetworkID) {
 				networkName = net.Metadata.Name
+			}
+		}
+
+		// Get the right firewall
+		var firewallName string
+		for _, fw := range firewall.Items {
+			if fw.Metadata.UID == types.UID(vm.FirewallID) {
+				firewallName = fw.Metadata.Name
 			}
 		}
 
@@ -46,7 +60,7 @@ func (s *Server) ListVirtualMachine(ctx context.Context, option *opencpspec.Filt
 			},
 			Spec: &opencpspec.VirtualMachineSpec{
 				Size:     vm.Size,
-				Firewall: vm.FirewallID,
+				Firewall: firewallName,
 				Ipv4:     false,
 				Ipv6:     false,
 				Image:    vm.SourceID,
@@ -116,14 +130,15 @@ func (s *Server) CreateVirtualMachine(ctx context.Context, in *opencpspec.Virtua
 		Tags:             in.Spec.Tags,
 	}
 
-	// Check the firewall
-	if in.Spec.Firewall != "" {
-		getFirewall, err := client.FindFirewall(in.Spec.Firewall)
-		if err != nil {
+	// Check if the incoming VM have firewall
+	if in.Spec.Firewall!= "" {
+        // Get the firewall object
+		firewall, err := s.GetFirewall(ctx, &opencpspec.FilterOptions{Name: &in.Spec.Firewall})
+		if err!= nil {
 			return nil, err
 		}
-		vm.FirewallID = getFirewall.ID
-	}
+		vm.FirewallID = string(firewall.Metadata.UID)
+    }
 
 	if in.Spec.Auth.User != "" {
 		vm.InitialUser = in.Spec.Auth.User
@@ -133,7 +148,7 @@ func (s *Server) CreateVirtualMachine(ctx context.Context, in *opencpspec.Virtua
 		vm.SSHKeyID = in.Spec.Auth.SshKey
 	}
 
-	// Create the cluster
+	// Create the VM
 	instance, err := client.CreateInstance(vm)
 	if err != nil {
 		return nil, err
@@ -184,6 +199,12 @@ func (s *Server) GetVirtualMachine(ctx context.Context, option *opencpspec.Filte
 		networkName = network.Metadata.Name
 	}
 
+	// Get the firewall
+	firewall, err := s.GetFirewall(ctx, &opencpspec.FilterOptions{Name: &vm.FirewallID})
+    if err!= nil {
+        return nil, err
+    }
+
 	return &opencpspec.VirtualMachine{
 		Metadata: &metav1.ObjectMeta{
 			Name:              vm.Hostname,
@@ -193,7 +214,7 @@ func (s *Server) GetVirtualMachine(ctx context.Context, option *opencpspec.Filte
 		},
 		Spec: &opencpspec.VirtualMachineSpec{
 			Size:     vm.Size,
-			Firewall: vm.FirewallID,
+			Firewall: firewall.Metadata.Name,
 			Ipv4:     false,
 			Ipv6:     false,
 			Image:    vm.SourceID,

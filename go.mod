@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/civo/civogo v0.3.23
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
-	github.com/opencontrolplane/opencp-spec v0.1.1
+	github.com/opencontrolplane/opencp-spec v0.1.2
 	github.com/sirupsen/logrus v1.4.2
 	google.golang.org/grpc v1.51.0
 	k8s.io/api v0.26.0

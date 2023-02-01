@@ -7,16 +7,14 @@ import (
 	"os"
 	"time"
 
+	"github.com/civo/civo-opencp/pkg"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
 	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	opencpspec "github.com/opencontrolplane/opencp-spec/grpc"
-	"github.com/civo/civo-opencp/pkg"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )
-
-
 
 func main() {
 	logrus.SetLevel(logrus.InfoLevel)
@@ -55,6 +53,9 @@ func main() {
 	opencpspec.RegisterSSHKeyServiceServer(grpcServer, &pkg.Server{})
 	opencpspec.RegisterFirewallServiceServer(grpcServer, &pkg.Server{})
 	opencpspec.RegisterIpServiceServer(grpcServer, &pkg.Server{})
+	opencpspec.RegisterDatabaseServiceServer(grpcServer, &pkg.Server{})
+	opencpspec.RegisterObjectStorageServiceServer(grpcServer, &pkg.Server{})
+	opencpspec.RegisterObjectStorageCredentialServiceServer(grpcServer, &pkg.Server{})
 
 	log.Printf("server listening at %v", lis.Addr())
 	if err := grpcServer.Serve(lis); err != nil {
