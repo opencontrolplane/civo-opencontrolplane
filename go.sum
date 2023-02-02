@@ -9,6 +9,8 @@ github.com/civo/civogo v0.3.22 h1:IYhsPP7kiRWe8SnUs9CMWzL4H+t4qi0hYQ0Nhkn7c5A=
 github.com/civo/civogo v0.3.22/go.mod h1:SbS06e0JPgIF27r1sLC97gjU1xWmONQeHgzF1hfLpak=
 github.com/civo/civogo v0.3.23 h1:FTSad682Qu7CsjkNAYWpSe2CSR1NJOE2NRxc6gUzHDk=
 github.com/civo/civogo v0.3.23/go.mod h1:SbS06e0JPgIF27r1sLC97gjU1xWmONQeHgzF1hfLpak=
+github.com/civo/civogo v0.3.24 h1:7kXEhtVUFkWIunNePqPCcIUilOktnXLWrKfi5sDqBNQ=
+github.com/civo/civogo v0.3.24/go.mod h1:SbS06e0JPgIF27r1sLC97gjU1xWmONQeHgzF1hfLpak=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -92,6 +94,8 @@ github.com/opencontrolplane/opencp-spec v0.1.1 h1:EEoud923w0eu4gyJZr+0K4Bdb0J4Q2
 github.com/opencontrolplane/opencp-spec v0.1.1/go.mod h1:F7CLNDq6HDLj9g84ecWzVMJRwsd3LtTwYY6ebh9UvTs=
 github.com/opencontrolplane/opencp-spec v0.1.2 h1:G6hQl3QOHzFu6DJmIaKR+M2npv4MOTpGNoR4d89Z54w=
 github.com/opencontrolplane/opencp-spec v0.1.2/go.mod h1:F7CLNDq6HDLj9g84ecWzVMJRwsd3LtTwYY6ebh9UvTs=
+github.com/opencontrolplane/opencp-spec v0.1.3 h1:kn/K8lAiIC+CRWTwLsCK2WhRL83WYEDdem3HkmWcXvU=
+github.com/opencontrolplane/opencp-spec v0.1.3/go.mod h1:F7CLNDq6HDLj9g84ecWzVMJRwsd3LtTwYY6ebh9UvTs=
 github.com/opentracing/opentracing-go v1.1.0/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
