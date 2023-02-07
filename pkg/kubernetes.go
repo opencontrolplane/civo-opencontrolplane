@@ -45,13 +45,13 @@ func (s *Server) CreateKubernetesCluster(ctx context.Context, in *opencpspec.Kub
 
 	// Check if the incoming cluster have firewall
 	if in.Spec.Firewall != "" {
-        // Get the firewall object
+		// Get the firewall object
 		firewall, err := s.GetFirewall(ctx, &opencpspec.FilterOptions{Name: &in.Spec.Firewall})
-		if err!= nil {
+		if err != nil {
 			return nil, err
 		}
 		k8sConfig.InstanceFirewall = string(firewall.Metadata.UID)
-    }
+	}
 
 	// create the kubernetes cluster
 	kubernetesCluster, err := client.NewKubernetesClusters(k8sConfig)
@@ -105,9 +105,9 @@ func (s *Server) GetKubernetesCluster(ctx context.Context, option *opencpspec.Fi
 
 	// Get the firewall
 	firewall, err := s.GetFirewall(ctx, &opencpspec.FilterOptions{Name: &k8s.FirewallID})
-    if err!= nil {
-        return nil, err
-    }
+	if err != nil {
+		return nil, err
+	}
 
 	// convert the pools
 	pools := []*opencpspec.KubernetesClusterPool{}
@@ -127,11 +127,12 @@ func (s *Server) GetKubernetesCluster(ctx context.Context, option *opencpspec.Fi
 			CreationTimestamp: metav1.NewTime(k8s.CreatedAt),
 		},
 		Spec: &opencpspec.KubernetesClusterSpec{
-			Pools:     pools,
-			Version:   k8s.Version,
-			Firewall:  firewall.Metadata.Name,
-			Cniplugin: k8s.CNIPlugin,
+			Pools:       pools,
+			Version:     k8s.Version,
+			Firewall:    firewall.Metadata.Name,
+			Cniplugin:   k8s.CNIPlugin,
 			Clustertype: k8s.ClusterType,
+			Kubeconfig:  k8s.KubeConfig,
 		},
 		Status: &opencpspec.KubernetesClusterStatus{
 			State:    k8s.Status,
@@ -156,10 +157,9 @@ func (s *Server) ListKubernetesCluster(ctx context.Context, option *opencpspec.F
 		return nil, err
 	}
 
-
 	// Get all firewall from Civo
 	firewall, err := s.ListFirewall(ctx, option)
-	if err!= nil {
+	if err != nil {
 		return nil, err
 	}
 
@@ -175,12 +175,12 @@ func (s *Server) ListKubernetesCluster(ctx context.Context, option *opencpspec.F
 		}
 
 		// Get the right firewall
-        var firewallName string
+		var firewallName string
 		for _, fw := range firewall.Items {
 			if fw.Metadata.UID == types.UID(k8s.FirewallID) {
-                firewallName = fw.Metadata.Name
-            }
-        }
+				firewallName = fw.Metadata.Name
+			}
+		}
 
 		// convert the pools
 		pools := []*opencpspec.KubernetesClusterPool{}
@@ -200,11 +200,12 @@ func (s *Server) ListKubernetesCluster(ctx context.Context, option *opencpspec.F
 				CreationTimestamp: metav1.Time{Time: k8s.CreatedAt},
 			},
 			Spec: &opencpspec.KubernetesClusterSpec{
-				Pools:     pools,
-				Version:   k8s.Version,
-				Firewall:  firewallName,
-				Cniplugin: k8s.CNIPlugin,
+				Pools:       pools,
+				Version:     k8s.Version,
+				Firewall:    firewallName,
+				Cniplugin:   k8s.CNIPlugin,
 				Clustertype: k8s.ClusterType,
+				Kubeconfig:  k8s.KubeConfig,
 			},
 			Status: &opencpspec.KubernetesClusterStatus{
 				State:    k8s.Status,
@@ -236,10 +237,6 @@ func (s *Server) ListKubernetesCluster(ctx context.Context, option *opencpspec.F
 		Items: kubernetesCluster,
 	}, nil
 }
-
-// func (s *Server) UpdateKubernetesCluster(ctx context.Context, in *opencpspec.KubernetesCluster) (*opencpspec.KubernetesCluster, error) {
-// 	panic("not implemented")
-// }
 
 func (s *Server) DeleteKubernetesCluster(ctx context.Context, option *opencpspec.FilterOptions) (*opencpspec.KubernetesCluster, error) {
 	client := ctx.Value("client").(*civogo.Client)
