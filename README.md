@@ -10,7 +10,7 @@ Open Control Plane (OpenCP) is a specification for a control plane that is desig
 
 You can run the Civo OpenCP by running the following command, which will start the Open Control Plane on port 8080.
 
-You would need to pass an `ENV` variable `REGION` to the container, this is the Civo region where you want to manage resources.
+You would need to pass an `ENV` variable `REGION` to the container. This is the Civo region where you want to manage resources, `lon1` in the below example.
 
 ```console
 docker run -d -p 8080:8080 -e REGION=lon1 civo/opencontrolplane
