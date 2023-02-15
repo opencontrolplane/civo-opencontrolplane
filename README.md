@@ -1,17 +1,22 @@
-## civo-opencontrolplane
-The Civo OpenControlPlane is the implematation of the OpenControlPlane specification for Civo.
+# civo-opencontrolplane
 
-## What is the OpenControlPlane?
-The OpenControlPlane is a specification for a control plane that is designed to be portable across multiple cloud providers. It is designed to be a simple, easy to use, and easy to implement.
+The Civo Open Control Plane is the implementation of the [OpenControlPlane](https://www.github.com/opencontrolplane) specification for [Civo](https://www.civo.com).
 
-## How to run the OpenControlPlane
-You can run the Civo OpenControlPlane by running the following command, which will start the OpenControlPlane on port 8080.
-also you need pass the ENV variable REGION to the container, this is the region you want to manage.
+## What is Open Control Plane?
 
-```
+Open Control Plane (OpenCP) is a specification for a control plane that is designed to be portable across multiple cloud providers. It is designed to be simple, easy to use, and easy to implement.
+
+## How to run the Civo Open Control Plane
+
+You can run the Civo OpenCP by running the following command, which will start the Open Control Plane on port 8080.
+
+You would need to pass an `ENV` variable `REGION` to the container, this is the Civo region where you want to manage resources.
+
+```console
 docker run -d -p 8080:8080 -e REGION=lon1 civo/opencontrolplane
 ``` 
 
 ## Dependencies
+
 The Civo OpenControlPlane depends on the following projects:
 - [Opencp-shim](https://github.com/opencontrolplane/opencp-shim)
