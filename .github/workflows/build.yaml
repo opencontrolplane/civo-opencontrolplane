@@ -26,6 +26,4 @@ jobs:
             civobot/opencp:${{  github.ref_name }}
             civobot/opencp:latest
           build-args: |
-            ACCESS_TOKEN_USR=${{ secrets.ACCESS_TOKEN_USR }}
-            ACCESS_TOKEN_PWD=${{ secrets.ACCESS_TOKEN_PWD }}
             VERSION=${{  github.ref_name }}
