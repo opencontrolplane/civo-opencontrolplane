@@ -36,11 +36,11 @@ func (s *Server) CreateKubernetesCluster(ctx context.Context, in *opencpspec.Kub
 		KubernetesVersion: in.Spec.Version,
 		NetworkID:         string(network.Metadata.UID),
 		Pools:             pools,
-		CNIPlugin:         in.Spec.Cniplugin,
+		CNIPlugin:         in.Spec.CniPlugin,
 	}
 
-	if in.Spec.Clustertype != "" {
-		k8sConfig.ClusterType = in.Spec.Clustertype
+	if in.Spec.ClusterType != "" {
+		k8sConfig.ClusterType = in.Spec.ClusterType
 	}
 
 	// Check if the incoming cluster have firewall
@@ -130,14 +130,14 @@ func (s *Server) GetKubernetesCluster(ctx context.Context, option *opencpspec.Fi
 			Pools:       pools,
 			Version:     k8s.Version,
 			Firewall:    firewall.Metadata.Name,
-			Cniplugin:   k8s.CNIPlugin,
-			Clustertype: k8s.ClusterType,
+			CniPlugin:   k8s.CNIPlugin,
+			ClusterType: k8s.ClusterType,
 			Kubeconfig:  k8s.KubeConfig,
 		},
 		Status: &opencpspec.KubernetesClusterStatus{
 			State:    k8s.Status,
 			Endpoint: k8s.APIEndPoint,
-			Publicip: k8s.MasterIP,
+			PublicIP: k8s.MasterIP,
 		},
 	}, nil
 }
@@ -203,14 +203,14 @@ func (s *Server) ListKubernetesCluster(ctx context.Context, option *opencpspec.F
 				Pools:       pools,
 				Version:     k8s.Version,
 				Firewall:    firewallName,
-				Cniplugin:   k8s.CNIPlugin,
-				Clustertype: k8s.ClusterType,
+				CniPlugin:   k8s.CNIPlugin,
+				ClusterType: k8s.ClusterType,
 				Kubeconfig:  k8s.KubeConfig,
 			},
 			Status: &opencpspec.KubernetesClusterStatus{
 				State:    k8s.Status,
 				Endpoint: k8s.APIEndPoint,
-				Publicip: k8s.MasterIP,
+				PublicIP: k8s.MasterIP,
 			},
 		})
 	}

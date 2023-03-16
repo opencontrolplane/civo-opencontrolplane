@@ -161,6 +161,8 @@ github.com/opencontrolplane/opencp-spec v0.1.8 h1:hB3OIghjO68qRGjUZkjpxKWNOXdN2b
 github.com/opencontrolplane/opencp-spec v0.1.8/go.mod h1:F7CLNDq6HDLj9g84ecWzVMJRwsd3LtTwYY6ebh9UvTs=
 github.com/opencontrolplane/opencp-spec v0.1.9 h1:70GjfvaJHhoyOm2bTfqY2BHLbTp5KIU8TEhZhYCBQZU=
 github.com/opencontrolplane/opencp-spec v0.1.9/go.mod h1:F7CLNDq6HDLj9g84ecWzVMJRwsd3LtTwYY6ebh9UvTs=
+github.com/opencontrolplane/opencp-spec v0.1.10 h1:TvLdDCDOmpZWIKAbmK8kaHQRhqgod1vCFDSm2zERMcs=
+github.com/opencontrolplane/opencp-spec v0.1.10/go.mod h1:F7CLNDq6HDLj9g84ecWzVMJRwsd3LtTwYY6ebh9UvTs=
 github.com/opentracing/opentracing-go v1.1.0/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
