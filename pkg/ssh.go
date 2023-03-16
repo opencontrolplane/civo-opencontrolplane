@@ -27,10 +27,10 @@ func (s *Server) ListSSHKey(ctx context.Context, option *opencpspec.FilterOption
 				CreationTimestamp: metav1.Time{Time: sshKey.CreatedAt},
 			},
 			Spec: &opencpspec.SSHKeySpec{
-				Publickey: sshKey.PublicKey,
+				PublicKey: sshKey.PublicKey,
 			},
 			Status: &opencpspec.SSHKeyStatus{
-				Fingerprint: sshKey.Fingerprint,
+				FingerPrint: sshKey.Fingerprint,
 				State:       "Active",
 			},
 		})
@@ -54,10 +54,10 @@ func (s *Server) GetSSHKey(ctx context.Context, option *opencpspec.FilterOptions
 			CreationTimestamp: metav1.Time{Time: sshKey.CreatedAt},
 		},
 		Spec: &opencpspec.SSHKeySpec{
-			Publickey: sshKey.PublicKey,
+			PublicKey: sshKey.PublicKey,
 		},
 		Status: &opencpspec.SSHKeyStatus{
-			Fingerprint: sshKey.Fingerprint,
+			FingerPrint: sshKey.Fingerprint,
 			State:       "Active",
 		},
 	}, nil
@@ -68,7 +68,7 @@ func (s *Server) CreateSSHKey(ctx context.Context, in *opencpspec.SSHKey) (*open
 	client := ctx.Value("client").(*civogo.Client)
 
 	// Create the SSH key
-	_, err := client.NewSSHKey(in.Metadata.Name, in.Spec.Publickey)
+	_, err := client.NewSSHKey(in.Metadata.Name, in.Spec.PublicKey)
 	if err != nil {
 		return nil, err
 	}

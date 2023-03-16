@@ -79,7 +79,7 @@ func (s *Server) ListFirewall(ctx context.Context, option *opencpspec.FilterOpti
 			},
 			Status: &opencpspec.FirewallStatus{
 				State:      fwstatus,
-				Totalrules: strconv.Itoa(fw.RulesCount),
+				TotalRules: strconv.Itoa(fw.RulesCount),
 			},
 		})
 	}
@@ -175,7 +175,7 @@ func (s *Server) GetFirewall(ctx context.Context, option *opencpspec.FilterOptio
 		},
 		Status: &opencpspec.FirewallStatus{
 			State:      fwstatus,
-			Totalrules: strconv.Itoa(fw.RulesCount),
+			TotalRules: strconv.Itoa(fw.RulesCount),
 		},
 	}, nil
 }

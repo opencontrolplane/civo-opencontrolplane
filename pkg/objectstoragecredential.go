@@ -19,13 +19,13 @@ func (s *Server) CreateObjectStorageCredential(ctx context.Context, in *opencpsp
 	}
 
 	// Check if the access key is provided
-	if in.Spec.Accesskey != "" {
-		objectStorageCredentialConfig.AccessKeyID = &in.Spec.Accesskey
+	if in.Spec.AccessKey != "" {
+		objectStorageCredentialConfig.AccessKeyID = &in.Spec.AccessKey
 	}
 
 	// Check if the secret key is provided
-	if in.Spec.Secretkey != "" {
-		objectStorageCredentialConfig.SecretAccessKeyID = &in.Spec.Secretkey
+	if in.Spec.SecretKey != "" {
+		objectStorageCredentialConfig.SecretAccessKeyID = &in.Spec.SecretKey
 	}
 
 	// Create object storage
@@ -78,8 +78,8 @@ func (s *Server) GetObjectStorageCredential(ctx context.Context, option *opencps
 			UID:  types.UID(objectStorageCredential.ID),
 		},
 		Spec: &opencpspec.ObjectStorageCredentialSpec{
-			Accesskey: objectStorageCredential.AccessKeyID,
-			Secretkey: objectStorageCredential.SecretAccessKeyID,
+			AccessKey: objectStorageCredential.AccessKeyID,
+			SecretKey: objectStorageCredential.SecretAccessKeyID,
 		},
 		Status: &opencpspec.ObjectStorageCredentialStatus{
 			State: objectStorageCredential.Status,
@@ -105,8 +105,8 @@ func (s *Server) ListObjectStorageCredential(ctx context.Context, option *opencp
 				UID:  types.UID(creadential.ID),
 			},
 			Spec: &opencpspec.ObjectStorageCredentialSpec{
-				Accesskey: creadential.AccessKeyID,
-				Secretkey: creadential.SecretAccessKeyID,
+				AccessKey: creadential.AccessKeyID,
+				SecretKey: creadential.SecretAccessKeyID,
 			},
 			Status: &opencpspec.ObjectStorageCredentialStatus{
 				State: creadential.Status,
